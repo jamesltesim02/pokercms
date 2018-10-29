@@ -6,8 +6,10 @@
     from pokercms import cmsapi
     # 查询俱乐部列表
     result = cmsapi.getClubList(username, password)
+    # 查询当前牌局列表
+    result = cmsapi.getCurrentGameList(username, password, club_id)
     # 查询带入提案
-    result = cmsapi.getBuyinList(username, password. club_id)
+    result = cmsapi.getBuyinList(username, password, club_id)
     # 接受提案
     result = cmsapi.acceptBuyin(username, password, user_uuid, room_id)
     # 拒绝提案
