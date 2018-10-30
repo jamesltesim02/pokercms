@@ -8,6 +8,8 @@
     result = cmsapi.getClubList(username, password)
     # 查询当前牌局列表
     result = cmsapi.getCurrentGameList(username, password, club_id)
+    # 查询牌局明细
+    result = getGameDetail(username, password, club_id, room_id)
     # 查询带入提案
     result = cmsapi.getBuyinList(username, password, club_id)
     # 接受提案

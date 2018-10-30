@@ -115,6 +115,20 @@ def getCurrentGameList(username, password, club_id):
   # 查询提案
   return invoke_api('game/getCurrentGameList', username, password)
 
+# 查询牌局详情
+def getGameDetail(username, password, club_id, room_id):
+  # 切换俱乐部
+  invoke_api('club/clubInfo', username, password, params={'clubId': club_id})
+  return invoke_api(
+    'game/getGameDetail',
+    username,
+    password,
+    {
+      'roomId': room_id,
+      'sort': 2
+    }
+  )
+
 # 查询提案列表
 def getBuyinList(username, password, club_id):
   # 切换俱乐部
@@ -124,34 +138,52 @@ def getBuyinList(username, password, club_id):
 
 # 接受提案
 def acceptBuyin(username, password, user_uuid, room_id):
-  return invoke_api('game/acceptBuyin', username, password, {
-    'userUuid': user_uuid,
-    'roomId': room_id
-  })
+  return invoke_api(
+    'game/acceptBuyin',
+    username,
+    password,
+    {
+      'userUuid': user_uuid,
+      'roomId': room_id
+    }
+  )
 
 # 拒绝提案
 def denyBuyin(username, password, user_uuid, room_id):
-  return invoke_api('game/denyBuyin', username, password, {
+  return invoke_api(
+    'game/denyBuyin', username, password, {
     'userUuid': user_uuid,
     'roomId': room_id
   })
 
 # 查询牌局列表
 def getHistoryGameList(username, password, club_id, start_time, end_time):
-  return invoke_api('game/getHistoryGameList', username, password, {
-    'clubId': club_id,
-    'startTime': start_time,
-    'endTime': end_time,
-    'keyword': '',
-    'order': -1,
-    'gameType': 1,
-    'pageSize': 1000,
-    'pageNumber': 1
-  })
+  return invoke_api(
+    'game/getHistoryGameList',
+    username,
+    password,
+    {
+      'clubId': club_id,
+      'startTime': start_time,
+      'endTime': end_time,
+      'keyword': '',
+      'order': -1,
+      'gameType': 1,
+      'pageSize': 1000,
+      'pageNumber': 1
+    }
+  )
 
 # 查询战绩
 def getHistoryGameDetail(username, password, room_id):
-  return invoke_api('game/getHistoryGameDetail', username, password, {'roomId': room_id})
+  return invoke_api(
+    'game/getHistoryGameDetail',
+    username,
+    password,
+    {
+      'roomId': room_id
+    }
+  )
 
 if __name__ == '__main__':
   username, password = '18206774149', 'aa8888'
@@ -159,14 +191,16 @@ if __name__ == '__main__':
   # 查询俱乐部列表
   # result = getClubList(username, password)
   # 查询当前牌局列表
-  result = getCurrentGameList(username, password, 588000)
+  # result = getCurrentGameList(username, password, 588000)
+  # 查询牌局明细
+  # result = getGameDetail(username, password, 588000, 33680918)
   # 查询带入提案
   # result = getBuyinList(username, password, 588000)
   # 接受提案
   # result = acceptBuyin(username, password, 691598, 33515925)
   # 拒绝提案
   # result = denyBuyin(username, password, 1575516, 33530967)
-  # 查询牌局列表
+  # 查询历史牌局列表
   #result = getHistoryGameList(username, password, 588000, 1538323200000, 1540396800000)
   # 查询战绩
   # result = getHistoryGameDetail(username, password, 33484968)
