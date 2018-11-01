@@ -137,7 +137,9 @@ def getBuyinList(username, password, club_id):
   return invoke_api('game/getBuyinList', username, password)
 
 # 接受提案
-def acceptBuyin(username, password, user_uuid, room_id):
+def acceptBuyin(username, password, user_uuid, club_id, room_id):
+  # 切换俱乐部
+  invoke_api('club/clubInfo', username, password, params={'clubId': club_id})
   return invoke_api(
     'game/acceptBuyin',
     username,
@@ -149,7 +151,9 @@ def acceptBuyin(username, password, user_uuid, room_id):
   )
 
 # 拒绝提案
-def denyBuyin(username, password, user_uuid, room_id):
+def denyBuyin(username, password, user_uuid, club_id, room_id):
+  # 切换俱乐部
+  invoke_api('club/clubInfo', username, password, params={'clubId': club_id})
   return invoke_api(
     'game/denyBuyin', username, password, {
     'userUuid': user_uuid,
@@ -175,7 +179,9 @@ def getHistoryGameList(username, password, club_id, start_time, end_time):
   )
 
 # 查询战绩
-def getHistoryGameDetail(username, password, room_id):
+def getHistoryGameDetail(username, password, club_id, room_id):
+  # 切换俱乐部
+  invoke_api('club/clubInfo', username, password, params={'clubId': club_id})
   return invoke_api(
     'game/getHistoryGameDetail',
     username,
@@ -197,13 +203,13 @@ if __name__ == '__main__':
   # 查询带入提案
   # result = getBuyinList(username, password, 588000)
   # 接受提案
-  # result = acceptBuyin(username, password, 691598, 33515925)
+  # result = acceptBuyin(username, password, 588000, 691598, 33515925)
   # 拒绝提案
-  # result = denyBuyin(username, password, 1575516, 33530967)
+  # result = denyBuyin(username, password, 588000, 1575516, 33530967)
   # 查询历史牌局列表
   #result = getHistoryGameList(username, password, 588000, 1538323200000, 1540396800000)
   # 查询战绩
-  # result = getHistoryGameDetail(username, password, 33484968)
+  result = getHistoryGameDetail(username, password, 588000, 33680918)
   
   print(result)
 

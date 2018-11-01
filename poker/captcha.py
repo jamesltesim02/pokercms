@@ -103,11 +103,13 @@ def crack(src):
   #加载训练集
   imageset = []
   for letter in iconset:
-    for img in os.listdir(os.path.dirname(os.path.realpath(__file__)) + '/Cutting/%s/'%(letter)):
-      temp = []
-      if img != "Thumbs.db" and img != ".DS_Store":
-        temp.append(buildvector(Image.open(os.path.dirname(os.path.realpath(__file__)) + '/Cutting/%s/%s'%(letter,img))))
-      imageset.append({letter:temp})
+    img_folder_path = os.path.dirname(os.path.realpath(__file__)) + '/Cutting/%s/'%(letter)
+    if os.path.exists(img_folder_path):
+      for img in os.listdir(img_folder_path):
+        temp = []
+        if img != "Thumbs.db" and img != ".DS_Store":
+          temp.append(buildvector(Image.open(os.path.dirname(os.path.realpath(__file__)) + '/Cutting/%s/%s'%(letter,img))))
+        imageset.append({letter:temp})
 
 
   count = 0
